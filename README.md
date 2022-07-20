@@ -9,4 +9,10 @@ Arcades collection for mobile
 20.07.2022
 - Menu extension
 - Timer and energy count finally completed
-- TimeScale fixed
+- TimeScale from game to menu fixed
+
+ToDo:
+- settings
+- shop
+- editor
+- graphics & sounds
