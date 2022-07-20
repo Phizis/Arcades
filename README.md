@@ -5,3 +5,8 @@ Arcades collection for mobile
 - Paddle, ball, blocks and physics implemented
 - Menu scene added
 - Level Editor doesnt work correctly
+
+20.07.2022
+- Menu extension
+- Timer and energy count finally completed
+- TimeScale fixed
