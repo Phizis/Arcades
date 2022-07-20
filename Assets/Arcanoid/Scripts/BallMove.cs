@@ -16,7 +16,7 @@ public class BallMove : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0 && !isActive)
+        if (Input.touchCount > 0  && !isActive)
         {
             Touch touch = Input.GetTouch(0);
             if (touch.tapCount > 1)
@@ -24,6 +24,13 @@ public class BallMove : MonoBehaviour
                 BallActivate();
             }
         }
+
+#if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.Space) && !isActive)
+        {
+            BallActivate();
+        }
+#endif
     }
 
     private void BallActivate()
