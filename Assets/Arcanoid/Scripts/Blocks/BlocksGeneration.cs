@@ -1,7 +1,8 @@
 #if UNITY_EDITOR
-using UnityEditor;
-#endif
 using UnityEngine;
+
+#endif
+using UnityEditor;
 
 public class BlocksGeneration
 {
@@ -17,14 +18,15 @@ public class BlocksGeneration
             {
                 otherBlock.BlocksData = gameLevel.Blocks[i].Block;
             }
+
+            if (game.TryGetComponent(out Blocks blocks))
+            {
+                blocks.BlocksData = gameLevel.Blocks[i].Block;
+                blocks.SetData(gameLevel.Blocks[i].Block as ColoredBlocks);
+            }
 #else
             game = GameObject.Instantiate(gameLevel.Blocks[i].Block.Prefab, parent);
 #endif
-            if (game.TryGetComponent(out Blocks blocks))
-            {
-                otherBlock.BlocksData = gameLevel.Blocks[i].Block;
-                blocks.SetData(gameLevel.Blocks[i].Block as ColoredBlocks);
-            }
             game.transform.position = gameLevel.Blocks[i].Position;
         }
 

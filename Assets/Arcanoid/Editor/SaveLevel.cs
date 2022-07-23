@@ -1,23 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-    public class SaveLevel
+public class SaveLevel
+{
+    public List<BlockObject> GetBlocks()
     {
-        public void Save(GameLevel gameLevel)
+        List<BlockObject> objects = new List<BlockObject>();
+        GameObject[] allBlocks = GameObject.FindGameObjectsWithTag("Blocks");
+
+        foreach (var item in allBlocks)
         {
-            gameLevel.Blocks = new List<BlockObject>();
-            Blocks[] baseBlocks = GameObject.FindObjectsOfType<Blocks>();
+            BlockObject blockObject = new BlockObject();
+            blockObject.Position = item.gameObject.transform.position;
 
-            foreach (var item in baseBlocks)
+            if(item.TryGetComponent(out Blocks blocks))
             {
-                BlockObject blockObject = new BlockObject
-                {
-                    Position = item.gameObject.transform.position,
-
-                    Block = item.BlocksData
-                };
-
-                gameLevel.Blocks.Add(blockObject);
+                blockObject.Block = blocks.BlocksData;
             }
+
+            if(item.TryGetComponent(out OtherBlocks otherBlocks))
+            {
+                blockObject.Block = otherBlocks.BlocksData;
+            }
+            objects.Add(blockObject);
         }
+        return objects;
     }
+}

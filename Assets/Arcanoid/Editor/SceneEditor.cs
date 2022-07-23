@@ -21,8 +21,6 @@ public class SceneEditor : EditorWindow
                 sceneView.camera.pixelHeight - current.mousePosition.y,
                 sceneView.camera.nearClipPlane));
 
-            Debug.Log(point.ToString("F2"));
-
             Vector3 position = _grid.CheckPosition(point);
             if (position != Vector3.zero)
             {
@@ -38,6 +36,7 @@ public class SceneEditor : EditorWindow
 
                     if (game.TryGetComponent(out Blocks block))
                     {
+                        block.BlocksData = _levelEditor.GetBlocks();
                         block.SetData(_levelEditor.GetBlocks() as ColoredBlocks);
                     }
                 }

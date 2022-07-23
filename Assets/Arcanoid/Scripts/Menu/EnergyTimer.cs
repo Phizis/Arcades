@@ -91,9 +91,4 @@ public class EnergyTimer : MonoBehaviour
     {
         SaveTime();
     }
-    
-    /*private void OnDestroy()
-    {
-        PlayerPrefs.SetString("StartTime", DateTime.Now.ToBinary().ToString());
-    }*/
 }

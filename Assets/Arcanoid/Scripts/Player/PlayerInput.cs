@@ -9,9 +9,12 @@ public class PlayerInput : MonoBehaviour
     private float direction = 0f;
     private void Update()
     {
+#if UNITY_EDITOR
         OnMove?.Invoke(Input.GetAxisRaw("Horizontal"));
-
+#endif
+#if UNITY_ANDROID
         GetTouchInput();
+#endif
     }
 
     private void GetTouchInput()

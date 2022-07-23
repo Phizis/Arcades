@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float _moveX = 0f;
     public float speed;
-    private const float BorderPositiion = 10.3f;
+    private const float BorderPositiion = 7.3f;
 
     private void Awake()
     {

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//useless
 public class PlayerData : MonoBehaviour
 {
     
@@ -28,7 +30,6 @@ public class PlayerData : MonoBehaviour
         //playerData.energy = menu.energyCount;
         PlayerPrefs.SetString("SaveGame", JsonUtility.ToJson(playerData));
     }
-
     private void LoadGame()
     {
         playerData = JsonUtility.FromJson<SavedData>(PlayerPrefs.GetString("SaveGame"));

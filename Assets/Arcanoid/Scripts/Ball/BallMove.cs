@@ -5,7 +5,6 @@ public class BallMove : MonoBehaviour
     private Rigidbody2D ball;
     private bool isActive;
     private const float Force = 300f;
-    private const float OffsetX = 100f;
     private float lastPositionX;
 
     private void Start()
@@ -16,6 +15,7 @@ public class BallMove : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_ANDROID
         if (Input.touchCount > 0  && !isActive)
         {
             Touch touch = Input.GetTouch(0);
@@ -24,6 +24,7 @@ public class BallMove : MonoBehaviour
                 BallActivate();
             }
         }
+#endif
 
 #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.Space) && !isActive)
@@ -35,6 +36,7 @@ public class BallMove : MonoBehaviour
 
     private void BallActivate()
     {
+        lastPositionX = transform.position.x;
         isActive = true;
         transform.SetParent(null);
         ball.bodyType = RigidbodyType2D.Dynamic;

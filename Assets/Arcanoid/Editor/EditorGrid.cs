@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EditorGrid
 {
-    private const float leftPosition = -8.5f;
-    private const float upPosition = 16.2f;
-    private const int columnCount = 18;
-    private const int rowCount = 40;
+    private const float leftPosition = -4.5f;
+    private const float upPosition = 9f;
+    private const int columnCount = 10;
+    private const int rowCount = 20;
     private const float offsetDown = 0.5f;
     private const float offsetRight = 1f;
 
@@ -21,7 +21,7 @@ public class EditorGrid
         if(position.x > x && position.x < (x + offsetRight * columnCount) &&
             position.y < y && position.y > (y - offsetDown * rowCount))
         {
-            for(int i=0; i < columnCount; i++)
+            for(int i = 0; i < columnCount; i++)
             {
                 if(position.x > x && position.x < (x + offsetRight))
                 {
@@ -34,7 +34,7 @@ public class EditorGrid
                 }
             }
 
-            for(int i=0; i< rowCount; i++)
+            for(int i = 0; i < rowCount; i++)
             {
                 if(position.y < y && position.y > (y - offsetDown))
                 {

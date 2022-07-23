@@ -37,7 +37,7 @@ public class LevelEditor : EditorWindow
         {
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Block Prefub", EditorStyles.boldLabel);
+            GUILayout.Label("Block Prefab", EditorStyles.boldLabel);
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
@@ -99,13 +99,14 @@ public class LevelEditor : EditorWindow
 
             _gameLevel = EditorGUILayout.ObjectField(_gameLevel, typeof(GameLevel), false) as GameLevel;
             GUILayout.Space(10);
+
             if (_gameLevel != null)
             {
                 GUILayout.BeginHorizontal();
                 if (GUILayout.Button("Save Level"))
                 {
                     SaveLevel saveLevel = new SaveLevel();
-                    saveLevel.Save(_gameLevel);
+                    _gameLevel.Blocks = saveLevel.GetBlocks();
                     EditorUtility.SetDirty(_gameLevel);
                     Debug.Log("Level Saved");
                 }
