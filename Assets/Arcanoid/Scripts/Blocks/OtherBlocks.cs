@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OtherBlocks : MonoBehaviour
+public class OtherBlocks : BaseBlock
 {
-#if UNITY_EDITOR
-    public BlocksData BlocksData;
-#endif
+
     [SerializeField] private ParticleSystem particle = null;
 
     private void Start()

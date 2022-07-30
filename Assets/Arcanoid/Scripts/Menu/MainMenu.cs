@@ -6,7 +6,7 @@ using System;
 public class MainMenu : MonoBehaviour
 {  
     [SerializeField] private TextMeshProUGUI energyText;    
-    public static int energyCount = 0;
+    public static int energyCount = 0;   
 
     private void Start()
     {        
@@ -32,8 +32,7 @@ public class MainMenu : MonoBehaviour
     private void SaveGame()
     {
         PlayerPrefs.SetInt("energy", energyCount);
-    }
-
+    }    
     private void LoadGame()
     {
         energyCount = PlayerPrefs.GetInt("energy");

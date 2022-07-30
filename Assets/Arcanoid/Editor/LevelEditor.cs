@@ -23,6 +23,15 @@ public class LevelEditor : EditorWindow
         _parent = (Transform)EditorGUILayout.ObjectField(_parent, typeof(Transform), true); // true - выбрать из ассетов или сцены
         EditorGUILayout.Space(30);
 
+        if(GUILayout.Button("Clear keys"))
+        {
+            LevelsData levelsData = new LevelsData();
+            levelsData.Clear();
+            LevelIndex levelIndex = new LevelIndex();
+            levelIndex.Clear();
+            Debug.Log("Keys cleared ");
+        } 
+
         EditorGUILayout.Space(30);
         if (_data == null)
         {
@@ -106,7 +115,7 @@ public class LevelEditor : EditorWindow
                 if (GUILayout.Button("Save Level"))
                 {
                     SaveLevel saveLevel = new SaveLevel();
-                    _gameLevel.Blocks = saveLevel.GetBlocks();
+                    saveLevel.Save(_gameLevel);
                     EditorUtility.SetDirty(_gameLevel);
                     Debug.Log("Level Saved");
                 }

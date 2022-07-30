@@ -4,6 +4,7 @@ using System;
 public class PlayerInput : MonoBehaviour
 {
     public static event Action<float> OnMove;
+    public static event Action OnClicked;
 
     private Vector2 startPosition = Vector2.zero;
     private float direction = 0f;
@@ -11,9 +12,14 @@ public class PlayerInput : MonoBehaviour
     {
 #if UNITY_EDITOR
         OnMove?.Invoke(Input.GetAxisRaw("Horizontal"));
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnClicked?.Invoke();
+        }
+
 #endif
 #if UNITY_ANDROID
-        GetTouchInput();
+            GetTouchInput();
 #endif
     }
 
@@ -22,22 +28,16 @@ public class PlayerInput : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
-            switch (touch.phase)
+            if (touch.tapCount > 1)
             {
-                //case TouchPhase.Began:
-                //    startPosition = touch.position;
-                //    direction = 0f;
-                //    break;
+                OnClicked?.Invoke();
+            }
+
+                switch (touch.phase)
+            {
                 case TouchPhase.Moved:
                     direction = touch.position.x > startPosition.x ? 1f : -1f;
                     break;
-                //case TouchPhase.Stationary:
-                //    break;
-                //case TouchPhase.Ended:
-                //    break;
-                //case TouchPhase.Canceled:
-                //    break;
                 default:
                     startPosition = touch.position;
                     direction = 0f;

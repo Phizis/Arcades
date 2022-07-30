@@ -5,7 +5,6 @@ public class BallMove : MonoBehaviour
     private Rigidbody2D ball;
     private bool isActive;
     private const float Force = 300f;
-    private float lastPositionX;
 
     private void Start()
     {
@@ -13,53 +12,28 @@ public class BallMove : MonoBehaviour
         ball.bodyType = RigidbodyType2D.Kinematic;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-#if UNITY_ANDROID
-        if (Input.touchCount > 0  && !isActive)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.tapCount > 1)
-            {
-                BallActivate();
-            }
-        }
-#endif
-
-#if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.Space) && !isActive)
-        {
-            BallActivate();
-        }
-#endif
+        PlayerInput.OnClicked += BallActivate;
+    }
+    private void OnDisable()
+    {
+        PlayerInput.OnClicked -= BallActivate;        
     }
 
     private void BallActivate()
     {
-        lastPositionX = transform.position.x;
-        isActive = true;
-        transform.SetParent(null);
-        ball.bodyType = RigidbodyType2D.Dynamic;
-        ball.AddForce(Vector2.up * Force);
-    }
-
-    public void MoveCollision(Collision2D collision)
-    {
-        float ballPositionX = transform.position.x;
-
-        if (collision.gameObject.TryGetComponent(out PlayerMove player))
+        if (!isActive)
         {
-            if(ballPositionX < lastPositionX + 0.1 && ballPositionX > lastPositionX - 0.1)
-            {
-                float collisionPointX = collision.contacts[0].point.x;
-                ball.velocity = Vector2.zero;
-                float playerCenterPosition = player.gameObject.GetComponent<Transform>().position.x;
-                float difference = playerCenterPosition - collisionPointX;
-                float direction = collisionPointX < playerCenterPosition ? -1 : 1;
-                ball.AddForce(new Vector2(direction * Mathf.Abs(difference * (Force / 2)), Force));
-            }
+            isActive = true;
+            transform.SetParent(null);
+            ball.bodyType = RigidbodyType2D.Dynamic;
+            AddForce();
         }
-
-        lastPositionX = ballPositionX;
+    }
+    public void AddForce(float direction = 0f)
+    {
+        ball.velocity = Vector2.zero;
+        ball.AddForce(new Vector2(direction * (Force / 2), Force));
     }
 }

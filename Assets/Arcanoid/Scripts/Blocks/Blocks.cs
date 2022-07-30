@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
-public class Blocks : MonoBehaviour
+public class Blocks : BaseBlock, IDamageable
 {
     private static int count = 0;
     [SerializeField] private List<Sprite> sprites;
@@ -10,9 +10,6 @@ public class Blocks : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private int life;
 
-#if UNITY_EDITOR
-    public BlocksData BlocksData;
-#endif
     public void SetData(ColoredBlocks blocksData)
     {
         sprites = new List<Sprite>(blocksData.Sprites);

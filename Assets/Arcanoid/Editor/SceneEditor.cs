@@ -29,14 +29,13 @@ public class SceneEditor : EditorWindow
                     GameObject game = PrefabUtility.InstantiatePrefab(_levelEditor.GetBlocks().Prefab, _parent) as GameObject;
                     game.transform.position = position;
 
-                    if (game.TryGetComponent(out OtherBlocks otherBlock))
+                    if (game.TryGetComponent(out BaseBlock baseBlock))
                     {
-                        otherBlock.BlocksData = _levelEditor.GetBlocks();
+                        baseBlock.BlocksData = _levelEditor.GetBlocks();
                     }
 
                     if (game.TryGetComponent(out Blocks block))
-                    {
-                        block.BlocksData = _levelEditor.GetBlocks();
+                    {                        
                         block.SetData(_levelEditor.GetBlocks() as ColoredBlocks);
                     }
                 }
