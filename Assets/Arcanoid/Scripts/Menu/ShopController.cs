@@ -19,8 +19,8 @@ public class ShopController : MonoBehaviour
         {
             shopText.text = "Your energy full!";
             yesButton.SetActive(false);
-
-            noButton.transform.position = new Vector2 (168f, 205f);
+            
+            noButton.transform.position = new Vector2 (0f, -1.27f);
             noButtonSprite.GetComponent<Image>().sprite = backSprite;
         }
     }

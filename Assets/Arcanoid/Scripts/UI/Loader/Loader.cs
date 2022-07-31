@@ -12,6 +12,16 @@ public class Loader
 
     public void LoadingMainScene(bool value)
     {
-        SceneManager.LoadSceneAsync(value ? Main : Arcanoid);
+        if (MainMenu.energyCount >= 10)
+        {
+            MainMenu.energyCount -= 10;
+            SaveGame();
+            SceneManager.LoadSceneAsync(value ? Main : Arcanoid);
+        }
+    }
+
+    private void SaveGame()
+    {
+        PlayerPrefs.SetInt("energy", MainMenu.energyCount);
     }
 }

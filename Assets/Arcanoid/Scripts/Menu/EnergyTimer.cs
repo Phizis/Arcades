@@ -10,7 +10,7 @@ public class EnergyTimer : MonoBehaviour
     TextMeshProUGUI timerText;
     [SerializeField] GameObject timerObject;
     
-    TimeSpan reload = TimeSpan.FromSeconds(10);    
+    TimeSpan reload = TimeSpan.FromSeconds(360);    
 
     [SerializeField] private int result = -1;
     TimeSpan difference;
@@ -29,16 +29,7 @@ public class EnergyTimer : MonoBehaviour
         else
         {
             SaveTime();
-        }
-
-        Difference();
-
-        if (difference > reload)
-        {
-            MainMenu.energyCount += (int)difference.TotalSeconds / (int)reload.TotalSeconds;
-            StartTime = CurrentTime;
-            SaveTime();
-        }
+        }        
     }
     private void FixedUpdate()
     {
@@ -81,6 +72,15 @@ public class EnergyTimer : MonoBehaviour
     {
         long temp = Convert.ToInt64(PlayerPrefs.GetString("StartTime"));
         StartTime = DateTime.FromBinary(temp);
+
+        Difference();
+
+        if (difference > reload)
+        {
+            MainMenu.energyCount += (int)difference.TotalSeconds / (int)reload.TotalSeconds;
+            StartTime = CurrentTime;
+            SaveTime();
+        }
     }
     private void Difference()
     {

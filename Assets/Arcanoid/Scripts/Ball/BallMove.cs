@@ -4,7 +4,7 @@ public class BallMove : MonoBehaviour
 {
     private Rigidbody2D ball;
     private bool isActive;
-    private const float Force = 300f;
+    private const float Force = 200f;
 
     private void Start()
     {

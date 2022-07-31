@@ -6,23 +6,23 @@ using System;
 public class MainMenu : MonoBehaviour
 {  
     [SerializeField] private TextMeshProUGUI energyText;    
-    public static int energyCount = 0;   
-
+    public static int energyCount;
     private void Start()
-    {        
+    {
         if (PlayerPrefs.HasKey("energy"))
         {
             LoadGame();
         }
         else
         {
+            energyCount = 100;
             SaveGame();
         }
         //energyCount = 80;
     }
     private void FixedUpdate()
     {
-        if(energyCount > 100)
+        if (energyCount > 100)
         {
             energyCount = 100;
         }
@@ -40,16 +40,6 @@ public class MainMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void Loading()
-    {
-        if (energyCount >= 10)
-        {
-            energyCount -= 10;
-            SaveGame();
-            SceneManager.LoadScene(1);
-        }
     }
     private void OnApplicationQuit()
     {
