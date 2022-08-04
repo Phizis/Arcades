@@ -50,4 +50,4 @@ https://phizis.itch.io/sirtet-arcades
 - Нарисовать бэкграунд, как для меню, так и для игры, да и в целом переосмыслить дизайн
 - Добавить игру Space ship trooper, вместо экрана "coming soon"
 
-###English
+### English
